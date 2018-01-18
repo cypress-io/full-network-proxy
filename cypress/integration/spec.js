@@ -73,7 +73,7 @@ describe('Network traffic rules', () => {
       cy.wrap(timings).its('elapsed').should('be.gt', 1000)
     })
 
-    it.only('by callback returning constant period', () => {
+    it('by callback returning constant period', () => {
       const timings = {
         started: +new Date(),
         elapsed: 0
@@ -81,12 +81,16 @@ describe('Network traffic rules', () => {
       cy.route({
         url: '/app.js',
         response: 'window.foo = 42',
-        delay: () => 500
+        delay: () => {
+          console.log('returning delay of 500ms')
+          return 500
+        }
       })
       cy.visit('index.html')
       cy.window().its('foo').should('equal', 42).then(() => {
         const finished = +new Date()
         timings.elapsed = finished - timings.started
+        console.log('computed elapsed', timings.elapsed)
       })
       cy.wrap(timings).its('elapsed').should('be.gt', 500)
     })
