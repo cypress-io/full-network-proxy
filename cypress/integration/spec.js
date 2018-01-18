@@ -5,10 +5,22 @@ describe('Network traffic rules', () => {
     // force collecting network rules
     cy.server()
   })
+
   it('runs mock app.js script', () => {
     cy.route('/app.js', 'window.foo = 42')
     cy.visit('index.html')
     cy.window().its('foo').should('equal', 42)
+  })
+
+  it('mocks app.css', () => {
+    cy.route({
+      url: '/app.css',
+      response: 'body { color: red }',
+      headers: {
+        'content-type': 'text/css; charset=UTF-8'
+      }
+    })
+    cy.visit('index.html')
   })
 
   it('returns script with headers', () => {
