@@ -55,13 +55,21 @@ describe('Network traffic rules', () => {
   })
 
   it('delays returned script', () => {
+    const timings = {
+      started: +new Date(),
+      elapsed: 0
+    }
     cy.route({
       url: '/app.js',
       response: 'window.foo = 42',
       delay: 1000
     })
     cy.visit('index.html')
-    cy.window().its('foo').should('equal', 42)
+    cy.window().its('foo').should('equal', 42).then(() => {
+      const finished = +new Date()
+      timings.elapsed = finished - timings.started
+    })
+    cy.wrap(timings).its('elapsed').should('be.gt', 1000)
   })
   // it('first', () => {
   //   cy.route('foo', 404)
