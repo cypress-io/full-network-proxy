@@ -21,6 +21,7 @@ describe('Network traffic rules', () => {
       }
     })
     cy.visit('index.html')
+    cy.contains('nothing').should('have.css', 'color', 'rgb(255, 0, 0)')
   })
 
   it('returns script with headers', () => {
