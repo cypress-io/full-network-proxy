@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/bahmutov/traffic-rules-demo/issues"
   },
-  "homepage": "https://github.com/bahmutov/traffic-rules-demo#readme"
+  "homepage": "https://github.com/bahmutov/traffic-rules-demo#readme",
+  "devDependencies": {
+    "debug": "^3.1.0",
+    "uuid": "^3.2.1"
+  }
 }
