@@ -94,6 +94,27 @@ describe('Network traffic rules', () => {
       })
       cy.wrap(timings).its('elapsed').should('be.gt', 500)
     })
+
+    it('by taking request into account', () => {
+      const delay = req => {
+        console.log('returning delay for request', req)
+        return req.url === '/app.js' ? 500 : 100
+      }
+      cy.route({
+        url: '/app.js',
+        response: 'window.foo = 42',
+        delay
+      })
+      cy.route({
+        url: '/app.css',
+        response: 'body { color: red }',
+        headers: {
+          'content-type': 'text/css; charset=UTF-8'
+        },
+        delay
+      })
+      cy.visit('index.html')
+    })
   })
 
   // it('first', () => {
