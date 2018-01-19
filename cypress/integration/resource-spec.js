@@ -1,5 +1,5 @@
 /* eslint-env mocha */
-/* global cy */
+/* global cy, expect */
 describe('Stubbing static resources', () => {
   beforeEach(() => {
     // force collecting network rules
@@ -22,6 +22,48 @@ describe('Stubbing static resources', () => {
     })
     cy.visit('index.html')
     cy.contains('nothing').should('have.css', 'color', 'rgb(255, 0, 0)')
+  })
+
+  it('sets headers in callback', () => {
+    let wasCalled = false
+    cy.route({
+      url: '/app.css',
+      response: 'body { color: green }',
+      headers: () => {
+        wasCalled = true
+        return {
+          'content-type': 'text/css; charset=UTF-8'
+        }
+      }
+    })
+    cy.visit('index.html')
+    cy.contains('nothing').should('have.css', 'color', 'rgb(0, 128, 0)')
+    cy.then(() => {
+      // eslint-disable-next-line no-unused-expressions
+      expect(wasCalled).to.be.true
+    })
+  })
+
+  it('sets headers in callback based on request', () => {
+    const urls = []
+    const headers = req => {
+      urls.push(req.url)
+    }
+
+    cy.route({
+      url: '/app.js',
+      response: 'window.foo = 42',
+      headers
+    })
+    cy.route({
+      url: '/app.css',
+      response: 'body { color: green }',
+      headers
+    })
+    cy.visit('index.html')
+    cy.then(() => {
+      expect(urls).to.include('/app.js').and.to.include('/app.css')
+    })
   })
 
   it('returns script with headers', () => {
