@@ -1,0 +1,18 @@
+<html>
+
+<body>
+  <p>Will do fetch</p>
+  <script>
+    const url = 'http://jsonplaceholder.typicode.com/users?_limit=3'
+    fetch(url, {
+      mode: 'cors'
+    }).then(r => r.json()).then(users => {
+      console.log('fetched %d users', users.length, users)
+      if (users.length !== 3) {
+        throw new Error('Expected only 3 users')
+      }
+    })
+  </script>
+</body>
+
+</html>
