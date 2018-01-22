@@ -1,0 +1,19 @@
+<html>
+
+<body>
+  <p>Will do XHR</p>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.1/axios.js"></script>
+  <script>
+    const url = '/users'
+    axios.get(url)
+      .then(r => r.body)
+      .then(users => {
+        console.log('fetched %d users', users.length, users)
+        if (users.length !== 3) {
+          throw new Error('Expected only 3 users')
+        }
+      })
+  </script>
+</body>
+
+</html>

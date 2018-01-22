@@ -43,7 +43,7 @@ describe('window.fetch', () => {
     cy.visit('has-fetch.html')
   })
 
-  it.skip('allows inspecting response', () => {
+  it('allows inspecting response', () => {
     cy
       .route({
         url: '/users?_limit=3',
@@ -54,7 +54,7 @@ describe('window.fetch', () => {
       })
       .as('users')
     cy.visit('has-fetch.html')
-    cy.get('@users').its('response.body').should('have.length', 3)
+    cy.wait('@users').its('response.body').should('have.length', 3)
   })
 
   it('returns data based on response', () => {
