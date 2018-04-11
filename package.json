@@ -20,5 +20,8 @@
   "devDependencies": {
     "debug": "^3.1.0",
     "uuid": "^3.2.1"
+  },
+  "prettier": {
+    "semi": false
   }
 }
