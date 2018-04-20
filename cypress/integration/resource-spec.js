@@ -36,6 +36,28 @@ describe("Stubbing static resources", () => {
     // https://github.com/cypress-io/traffic-rules-demo/issues/2
   })
 
+  it.skip("can modify index.html", () => {
+    const mock = `
+    <head>
+      <script>document.domain = 'localhost';
+      var Cypress = window.Cypress = parent.Cypress;
+      Cypress.action('app:window:before:load', window);
+      </script>
+    </head>
+    <p>hi there</p>
+    `
+    cy.route({
+      url: "/has-scripts.html",
+      response: r => {
+        // TODO need actual response body!
+        console.log(r)
+        return r
+      }
+    })
+    cy.visit("has-scripts.html")
+    // https://github.com/cypress-io/traffic-rules-demo/issues/3
+  })
+
   it("runs mock app.js script", () => {
     cy.route("/app.js", "window.foo = 42")
     cy.visit("index.html")
