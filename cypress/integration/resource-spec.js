@@ -1,3 +1,5 @@
+const sanitizeHtml = require("sanitize-html")
+
 /* eslint-env mocha */
 /* global cy, expect */
 describe("Stubbing static resources", () => {
@@ -36,7 +38,7 @@ describe("Stubbing static resources", () => {
     // https://github.com/cypress-io/traffic-rules-demo/issues/2
   })
 
-  it.skip("can modify index.html", () => {
+  it.only("can modify index.html", () => {
     const mock = `
     <head>
       <script>document.domain = 'localhost';
@@ -50,6 +52,7 @@ describe("Stubbing static resources", () => {
       url: "/has-scripts.html",
       response: r => {
         // TODO need actual response body!
+        console.log(sanitizeHtml("<a onerror=alert('img') href='foo'>go</a>"))
         console.log(r)
         return r
       }
