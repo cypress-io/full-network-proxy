@@ -14,7 +14,7 @@ describe('window.fetch', () => {
         'access-control-allow-origin': '*'
       }
     })
-    cy.visit('has-fetch.html')
+    cy.visit('pages/has-fetch.html')
   })
 
   it('stubs fetch with alias', () => {
@@ -27,7 +27,7 @@ describe('window.fetch', () => {
         }
       })
       .as('users')
-    cy.visit('has-fetch.html')
+    cy.visit('pages/has-fetch.html')
   })
 
   it('returns mock data', () => {
@@ -40,7 +40,7 @@ describe('window.fetch', () => {
         }
       })
       .as('users')
-    cy.visit('has-fetch.html')
+    cy.visit('pages/has-fetch.html')
   })
 
   it('allows inspecting response', () => {
@@ -53,7 +53,7 @@ describe('window.fetch', () => {
         }
       })
       .as('users')
-    cy.visit('has-fetch.html')
+    cy.visit('pages/has-fetch.html')
     cy.wait('@users').its('response.body').should('have.length', 3)
   })
 
@@ -71,7 +71,7 @@ describe('window.fetch', () => {
         }
       })
       .as('users')
-    cy.visit('has-fetch.html')
+    cy.visit('pages/has-fetch.html')
     cy.wait('@users').then(() => {
       expect(req).to.deep.equal({
         method: 'GET',

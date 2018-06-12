@@ -11,11 +11,11 @@ describe('Delay', () => {
       elapsed: 0
     }
     cy.route({
-      url: '/app.js',
+      url: '/pages/app.js',
       response: 'window.foo = 42',
       delay: 1000
     })
-    cy.visit('index.html')
+    cy.visit('pages/index.html')
     cy.window().its('foo').should('equal', 42).then(() => {
       const finished = +new Date()
       timings.elapsed = finished - timings.started
@@ -29,14 +29,14 @@ describe('Delay', () => {
       elapsed: 0
     }
     cy.route({
-      url: '/app.js',
+      url: '/pages/app.js',
       response: 'window.foo = 42',
       delay: () => {
         console.log('returning delay of 500ms')
         return 500
       }
     })
-    cy.visit('index.html')
+    cy.visit('pages/index.html')
     cy.window().its('foo').should('equal', 42).then(() => {
       const finished = +new Date()
       timings.elapsed = finished - timings.started
@@ -51,18 +51,18 @@ describe('Delay', () => {
       return req.url === '/app.js' ? 500 : 100
     }
     cy.route({
-      url: '/app.js',
+      url: '/pages/app.js',
       response: 'window.foo = 42',
       delay
     })
     cy.route({
-      url: '/app.css',
+      url: '/pages/app.css',
       response: 'body { color: red }',
       headers: {
         'content-type': 'text/css; charset=UTF-8'
       },
       delay
     })
-    cy.visit('index.html')
+    cy.visit('pages/index.html')
   })
 })

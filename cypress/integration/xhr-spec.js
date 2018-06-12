@@ -13,7 +13,7 @@ describe('XHR', () => {
         response: [1, 2, 3]
       })
       .as('users')
-    cy.visit('has-xhr.html')
+    cy.visit('pages/has-xhr.html')
     cy.wait('@users').its('response.body').should('have.length', 3)
   })
 })

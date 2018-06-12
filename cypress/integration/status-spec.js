@@ -12,7 +12,7 @@ describe('Response status', () => {
       response: '',
       status: 404
     })
-    cy.visit('index.html')
+    cy.visit('pages/index.html')
   })
 
   it('returns status in callback', () => {
@@ -21,7 +21,7 @@ describe('Response status', () => {
       url: '/app.js',
       status
     })
-    cy.visit('index.html')
+    cy.visit('pages/index.html')
     cy.get('@status').should('have.been.calledOnce')
   })
 
@@ -42,7 +42,7 @@ describe('Response status', () => {
       response: 'body { color: green }',
       status
     })
-    cy.visit('index.html')
+    cy.visit('pages/index.html')
     cy.then(() => {
       expect(urls).to.include('/app.js').and.to.include('/app.css')
     })
@@ -58,7 +58,7 @@ describe('Response status', () => {
       url: '/app.js',
       status
     })
-    cy.visit('index.html')
+    cy.visit('pages/index.html')
     cy.then(() => {
       expect(reqReference).deep.equal({
         method: 'GET',
