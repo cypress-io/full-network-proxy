@@ -21,7 +21,8 @@ const name = "/app.js"
 cy.route({
   status: req => {
     if (req.url === name) {
-      // returned value is defined should be the status
+      // if the callback returns a value
+      // it will be the response status
       return 404
     }
     // otherwise let the request go through
