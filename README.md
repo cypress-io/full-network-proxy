@@ -41,6 +41,7 @@ This repo shows different types of tests as if a "normal" user would write them.
 - [stubbing static resources like stylesheets](cypress/integration/resource-spec.js)
 - [custom response statuses](cypress/integration/status-spec.js)
 - [XHR stubbing](cypress/integration/xhr-spec.js)
+- [GraphQL stubbing](cypress/integration/graphql-spec.js)
 
 ## Running
 

@@ -4,7 +4,8 @@
   "description": "Cypress with network traffic rules demo",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "graphql": "json-graphql-server src/db.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   "homepage": "https://github.com/bahmutov/traffic-rules-demo#readme",
   "devDependencies": {
     "debug": "^3.1.0",
+    "json-graphql-server": "2.1.1",
     "sanitize-html": "1.18.2",
     "uuid": "^3.2.1"
   },
