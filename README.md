@@ -1,6 +1,6 @@
 This is a demo repo with Cypress Specs showing features of the new network layer stubbing.
 
-See Cypress issue [#687](https://github.com/cypress-io/cypress/issues/687) and pull request [#1563](https://github.com/cypress-io/cypress/pull/1563/)
+See Cypress issue [#687](https://github.com/cypress-io/cypress/issues/687) and pull request [#1931](https://github.com/cypress-io/cypress/pull/1931/)
 
 ## Main idea
 
@@ -40,3 +40,11 @@ This repo shows different types of tests as if a "normal" user would write them.
 - [stubbing static resources like stylesheets](cypress/integration/resource-spec.js)
 - [custom response statuses](cypress/integration/status-spec.js)
 - [XHR stubbing](cypress/integration/xhr-spec.js)
+
+## Running
+
+While the new version of Cypress with full network stubbing is not released, it is in the branch `full-network-stubbing-687`. So to run this repository (assuming it was cloned into local folder `/git/repo`)
+
+- pull repo https://github.com/cypress-io/cypress
+- switch to branch `full-network-stubbing-687`
+- `npm run dev -- --project /git/repo` to open Cypress GUI with this repo
